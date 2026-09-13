@@ -1,6 +1,6 @@
 package com.example.techcorp;
 
-/** Something that can randomly happen to a company during a turn. */
+/** Coś, co może losowo przytrafić się firmie w danej turze. */
 public interface GameEvent {
 
     void apply(Company company);

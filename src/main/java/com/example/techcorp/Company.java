@@ -3,7 +3,7 @@ package com.example.techcorp;
 import java.util.ArrayList;
 import java.util.List;
 
-/** A competitor in the game: has cash, a team, and one project to finish. */
+/** Jeden z dwóch graczy w grze: ma gotówkę, zespół i jeden projekt do ukończenia. */
 public class Company {
 
     private final String name;
@@ -13,10 +13,10 @@ public class Company {
 
     public Company(String name, double cash, Project project) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Company name cannot be null or blank.");
+            throw new IllegalArgumentException("Nazwa firmy nie może być pusta.");
         }
         if (cash < 0) {
-            throw new IllegalArgumentException("Company cash cannot be negative.");
+            throw new IllegalArgumentException("Gotówka firmy nie może być ujemna.");
         }
         this.name = name;
         this.cash = cash;
@@ -24,15 +24,15 @@ public class Company {
     }
 
     /**
-     * Hires an employee if the company can afford it.
-     * Precondition: cost <= cash. If violated, an InsufficientFundsException
-     * is thrown instead of silently letting cash go negative.
+     * Zatrudnia pracownika, jeśli firmę na to stać.
+     * Warunek wstępny: cost <= cash. W przeciwnym razie rzucany jest
+     * InsufficientFundsException zamiast pozwolić, by gotówka spadła poniżej zera.
      */
     public void hire(Employee employee, double cost) throws InsufficientFundsException {
         if (cost > cash) {
             throw new InsufficientFundsException(
-                    name + " cannot afford " + employee.getName()
-                            + " (needs " + cost + ", has " + cash + ").");
+                    name + " nie może pozwolić sobie na zatrudnienie " + employee.getName()
+                            + " (potrzeba " + cost + ", jest " + cash + ").");
         }
         cash -= cost;
         employees.add(employee);
@@ -43,18 +43,18 @@ public class Company {
         project.workOneTurn();
     }
 
-    /** Used by negative random events. Cash is clamped at 0, never negative. */
+    /** Używane przez negatywne zdarzenia losowe. Gotówka nigdy nie spada poniżej zera. */
     public void reduceCash(double amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("Amount to reduce cannot be negative.");
+            throw new IllegalArgumentException("Kwota do odjęcia nie może być ujemna.");
         }
         cash = Math.max(0, cash - amount);
     }
 
-    /** Used by positive random events. */
+    /** Używane przez pozytywne zdarzenia losowe. */
     public void addCash(double amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("Amount to add cannot be negative.");
+            throw new IllegalArgumentException("Kwota do dodania nie może być ujemna.");
         }
         cash += amount;
     }

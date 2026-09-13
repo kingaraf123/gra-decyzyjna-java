@@ -1,13 +1,13 @@
 package com.example.techcorp;
 
-/** Positive event: the project gains extra progress directly (e.g. a lucky breakthrough). */
+/** Zdarzenie pozytywne: projekt zyskuje dodatkowy postęp wprost (np. szczęśliwy przełom). */
 public class ProductivityBoostEvent implements GameEvent {
 
     private final int amount;
 
     public ProductivityBoostEvent(int amount) {
         if (amount <= 0) {
-            throw new IllegalArgumentException("Boost amount must be positive.");
+            throw new IllegalArgumentException("Wartość wzrostu musi być dodatnia.");
         }
         this.amount = amount;
     }
@@ -19,6 +19,6 @@ public class ProductivityBoostEvent implements GameEvent {
 
     @Override
     public String getDescription() {
-        return "Productivity boost: +" + amount + " progress";
+        return "Wzrost produktywności: +" + amount + " postępu";
     }
 }

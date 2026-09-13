@@ -1,6 +1,6 @@
 package com.example.techcorp;
 
-/** Least direct output, but the cheapest role to hire. */
+/** Najmniejszy bezpośredni wkład pracy, ale najtańszy w zatrudnieniu. */
 public class Manager extends Employee {
 
     public Manager(String name, int skill, double salary) {

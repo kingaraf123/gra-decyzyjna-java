@@ -3,7 +3,7 @@ package com.example.techcorp;
 import java.util.ArrayList;
 import java.util.List;
 
-/** A project that a company is racing to complete. */
+/** Projekt, który firma stara się ukończyć jako pierwsza. */
 public class Project {
 
     private final String name;
@@ -13,10 +13,10 @@ public class Project {
 
     public Project(String name, int requiredWork) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Project name cannot be null or blank.");
+            throw new IllegalArgumentException("Nazwa projektu nie może być pusta.");
         }
         if (requiredWork <= 0) {
-            throw new IllegalArgumentException("Required work must be greater than 0.");
+            throw new IllegalArgumentException("Wymagana ilość pracy musi być większa od 0.");
         }
         this.name = name;
         this.requiredWork = requiredWork;
@@ -25,12 +25,12 @@ public class Project {
 
     public void addEmployee(Employee employee) {
         if (employee == null) {
-            throw new IllegalArgumentException("Employee cannot be null.");
+            throw new IllegalArgumentException("Pracownik nie może być null.");
         }
         team.add(employee);
     }
 
-    /** Every employee on the team contributes work; progress cannot exceed requiredWork. */
+    /** Każdy pracownik z zespołu wykonuje pracę; postęp nie może przekroczyć requiredWork. */
     public void workOneTurn() {
         for (Employee employee : team) {
             progress += employee.work();
@@ -41,12 +41,12 @@ public class Project {
     }
 
     /**
-     * Adds progress directly (e.g. from a random event).
-     * Precondition: amount >= 0. Postcondition: 0 <= progress <= requiredWork.
+     * Dodaje postęp bezpośrednio (np. w wyniku zdarzenia losowego).
+     * Warunek wstępny: amount >= 0. Warunek końcowy: 0 <= progress <= requiredWork.
      */
     public void addProgress(int amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("Progress amount cannot be negative.");
+            throw new IllegalArgumentException("Wartość postępu nie może być ujemna.");
         }
         progress += amount;
         if (progress > requiredWork) {

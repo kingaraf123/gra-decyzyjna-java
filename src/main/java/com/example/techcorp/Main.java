@@ -6,10 +6,10 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your name: ");
+        System.out.print("Podaj swoje imię: ");
         String name = scanner.nextLine().trim();
         if (name.isBlank()) {
-            name = "Player";
+            name = "Gracz";
         }
 
         Game game = new Game(name);

@@ -1,9 +1,9 @@
 package com.example.techcorp;
 
 /**
- * Checked exception thrown when a company tries to hire someone
- * it cannot afford. Checked, because the caller (the game loop)
- * is expected to handle this situation explicitly rather than crash.
+ * Wyjątek sprawdzany (checked), rzucany, gdy firma próbuje zatrudnić kogoś,
+ * na kogo jej nie stać. Jest sprawdzany, ponieważ oczekujemy, że wołający
+ * (pętla gry) obsłuży tę sytuację jawnie, zamiast pozwolić programowi się wywalić.
  */
 public class InsufficientFundsException extends Exception {
 

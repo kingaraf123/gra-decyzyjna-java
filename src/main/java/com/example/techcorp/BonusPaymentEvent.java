@@ -1,13 +1,13 @@
 package com.example.techcorp;
 
-/** Positive event: the company receives extra cash (e.g. an investor bonus). */
+/** Zdarzenie pozytywne: firma otrzymuje dodatkową gotówkę (np. premia od inwestora). */
 public class BonusPaymentEvent implements GameEvent {
 
     private final double amount;
 
     public BonusPaymentEvent(double amount) {
         if (amount <= 0) {
-            throw new IllegalArgumentException("Bonus amount must be positive.");
+            throw new IllegalArgumentException("Kwota premii musi być dodatnia.");
         }
         this.amount = amount;
     }
@@ -19,6 +19,6 @@ public class BonusPaymentEvent implements GameEvent {
 
     @Override
     public String getDescription() {
-        return "Bonus payment: +" + (int) amount + " cash";
+        return "Premia finansowa: +" + (int) amount + " gotówki";
     }
 }

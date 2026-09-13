@@ -1,6 +1,6 @@
 package com.example.techcorp;
 
-/** Cheaper worker: contributes half of the skill value each turn. */
+/** Tańszy pracownik: w każdej turze wykonuje połowę wartości skill. */
 public class Tester extends Employee {
 
     public Tester(String name, int skill, double salary) {

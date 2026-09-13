@@ -1,13 +1,13 @@
 package com.example.techcorp;
 
-/** Negative event: the company loses cash (e.g. a market downturn). */
+/** Zdarzenie negatywne: firma traci gotówkę (np. spowolnienie rynku). */
 public class MarketSlowdownEvent implements GameEvent {
 
     private final double amount;
 
     public MarketSlowdownEvent(double amount) {
         if (amount <= 0) {
-            throw new IllegalArgumentException("Slowdown amount must be positive.");
+            throw new IllegalArgumentException("Kwota spowolnienia musi być dodatnia.");
         }
         this.amount = amount;
     }
@@ -19,6 +19,6 @@ public class MarketSlowdownEvent implements GameEvent {
 
     @Override
     public String getDescription() {
-        return "Market slowdown: -" + (int) amount + " cash";
+        return "Spowolnienie rynku: -" + (int) amount + " gotówki";
     }
 }

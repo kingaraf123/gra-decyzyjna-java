@@ -5,9 +5,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Turn-based race: the player's company vs. an algorithm-controlled company.
- * Both start with the same cash and the same required work; whoever finishes
- * the project first wins.
+ * Wyścig turowy: Twoja firma kontra firma sterowana przez algorytm.
+ * Obie zaczynają z tą samą gotówką i tym samym wymaganym nakładem pracy;
+ * wygrywa ta, która pierwsza ukończy projekt.
  */
 public class Game {
 
@@ -27,17 +27,17 @@ public class Game {
     private int turn = 0;
 
     public Game(String playerName) {
-        this.player = new Company(playerName, STARTING_CASH, new Project("Player Project", REQUIRED_WORK));
-        this.algorithm = new Company("Algorithm", STARTING_CASH, new Project("Algorithm Project", REQUIRED_WORK));
+        this.player = new Company(playerName, STARTING_CASH, new Project("Projekt gracza", REQUIRED_WORK));
+        this.algorithm = new Company("Algorytm", STARTING_CASH, new Project("Projekt algorytmu", REQUIRED_WORK));
     }
 
     public void run() {
-        System.out.println("=== TechCorp Decision Game ===");
-        System.out.println("Hire employees each turn and race the algorithm to finish your project first.\n");
+        System.out.println("=== Gra decyzyjna TechCorp ===");
+        System.out.println("Zatrudniaj pracowników w każdej turze i prześcignij algorytm w ukończeniu projektu.\n");
 
         while (!player.getProject().isFinished() && !algorithm.getProject().isFinished()) {
             turn++;
-            System.out.println("--- Turn " + turn + " ---");
+            System.out.println("--- Tura " + turn + " ---");
             printStatus();
             playerTurn();
             algorithmTurn();
@@ -51,20 +51,20 @@ public class Game {
     }
 
     private void printStatus() {
-        System.out.printf("%-10s cash=%.0f  employees=%d  progress=%d/%d%n",
+        System.out.printf("%-10s gotówka=%.0f  pracownicy=%d  postęp=%d/%d%n",
                 player.getName(), player.getCash(), player.getEmployees().size(),
                 player.getProject().getProgress(), player.getProject().getRequiredWork());
-        System.out.printf("%-10s cash=%.0f  employees=%d  progress=%d/%d%n",
+        System.out.printf("%-10s gotówka=%.0f  pracownicy=%d  postęp=%d/%d%n",
                 algorithm.getName(), algorithm.getCash(), algorithm.getEmployees().size(),
                 algorithm.getProject().getProgress(), algorithm.getProject().getRequiredWork());
     }
 
     private void playerTurn() {
-        System.out.println("Choose an action:");
-        System.out.println("1 - Hire Developer (cost 4000, skill 8)");
-        System.out.println("2 - Hire Tester (cost 2500, skill 5)");
-        System.out.println("3 - Hire Manager (cost 3000, skill 4)");
-        System.out.println("4 - Skip this turn (save cash)");
+        System.out.println("Wybierz akcję:");
+        System.out.println("1 - Zatrudnij Developera (koszt 4000, umiejętność 8)");
+        System.out.println("2 - Zatrudnij Testera (koszt 2500, umiejętność 5)");
+        System.out.println("3 - Zatrudnij Managera (koszt 3000, umiejętność 4)");
+        System.out.println("4 - Pomiń turę (zaoszczędź gotówkę)");
         System.out.print("> ");
 
         int choice = readChoice();
@@ -75,10 +75,10 @@ public class Game {
                 case 1 -> player.hire(new Developer("Dev" + teamSize, 8, 5000), 4000);
                 case 2 -> player.hire(new Tester("Tester" + teamSize, 5, 3500), 2500);
                 case 3 -> player.hire(new Manager("Manager" + teamSize, 4, 4500), 3000);
-                default -> System.out.println("Skipping this turn.");
+                default -> System.out.println("Pomijasz tę turę.");
             }
         } catch (InsufficientFundsException e) {
-            System.out.println("Could not hire: " + e.getMessage());
+            System.out.println("Nie udało się zatrudnić: " + e.getMessage());
         }
     }
 
@@ -90,25 +90,25 @@ public class Game {
         }
     }
 
-    /** Very simple algorithm opponent: hires while it can afford it, otherwise saves cash. */
+    /** Bardzo prosty algorytm przeciwnika: zatrudnia, dopóki go stać, w przeciwnym razie oszczędza. */
     private void algorithmTurn() {
         int teamSize = algorithm.getEmployees().size() + 1;
         try {
             if (algorithm.getCash() >= 4000 && algorithm.getEmployees().size() < 3) {
                 algorithm.hire(new Developer("Bot-Dev" + teamSize, 8, 5000), 4000);
-                System.out.println(algorithm.getName() + " hires a Developer.");
+                System.out.println(algorithm.getName() + " zatrudnia Developera.");
             } else if (algorithm.getCash() >= 2500) {
                 algorithm.hire(new Tester("Bot-Tester" + teamSize, 5, 3500), 2500);
-                System.out.println(algorithm.getName() + " hires a Tester.");
+                System.out.println(algorithm.getName() + " zatrudnia Testera.");
             } else {
-                System.out.println(algorithm.getName() + " saves cash this turn.");
+                System.out.println(algorithm.getName() + " oszczędza gotówkę w tej turze.");
             }
         } catch (InsufficientFundsException e) {
-            System.out.println(algorithm.getName() + " could not hire: " + e.getMessage());
+            System.out.println(algorithm.getName() + " nie mógł zatrudnić: " + e.getMessage());
         }
     }
 
-    /** With EVENT_CHANCE probability, applies a random event to a randomly picked company. */
+    /** Z prawdopodobieństwem EVENT_CHANCE stosuje losowe zdarzenie na losowo wybranej firmie. */
     private void triggerRandomEvent() {
         if (random.nextDouble() > EVENT_CHANCE) {
             return;
@@ -116,26 +116,26 @@ public class Game {
         GameEvent event = eventPool.get(random.nextInt(eventPool.size()));
         Company target = random.nextBoolean() ? player : algorithm;
         event.apply(target);
-        System.out.println("EVENT (" + target.getName() + "): " + event.getDescription());
+        System.out.println("ZDARZENIE (" + target.getName() + "): " + event.getDescription());
     }
 
     private void finishGame() {
-        System.out.println("=== GAME OVER after " + turn + " turns ===");
+        System.out.println("=== KONIEC GRY po " + turn + " turach ===");
         printStatus();
 
         String winner;
         if (player.getProject().isFinished() && algorithm.getProject().isFinished()) {
-            winner = "Tie";
+            winner = "Remis";
         } else if (player.getProject().isFinished()) {
             winner = player.getName();
         } else {
             winner = algorithm.getName();
         }
-        System.out.println("Winner: " + winner);
+        System.out.println("Zwycięzca: " + winner);
 
         ResultSaver.saveResult(player.getName(), turn, winner);
 
-        System.out.println("\nResult history (results.txt):");
+        System.out.println("\nHistoria wyników (results.txt):");
         ResultSaver.printHistory();
     }
 }

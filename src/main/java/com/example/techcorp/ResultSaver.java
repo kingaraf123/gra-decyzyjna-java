@@ -9,27 +9,27 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/** Saves and reads game results from a simple text file, one line per game. */
+/** Zapisuje i odczytuje wyniki gier z prostego pliku tekstowego, jedna linia na grę. */
 public class ResultSaver {
 
     private static final String FILE_NAME = "results.txt";
 
     public static void saveResult(String playerName, int turns, String winner) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        String line = timestamp + " | player=" + playerName + " | turns=" + turns + " | winner=" + winner;
+        String line = timestamp + " | gracz=" + playerName + " | tury=" + turns + " | zwyciezca=" + winner;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
             writer.write(line);
             writer.newLine();
         } catch (IOException e) {
-            System.out.println("Could not save the result to file: " + e.getMessage());
+            System.out.println("Nie udało się zapisać wyniku do pliku: " + e.getMessage());
         }
     }
 
     public static void printHistory() {
         File file = new File(FILE_NAME);
         if (!file.exists()) {
-            System.out.println("No previous results yet.");
+            System.out.println("Brak wcześniejszych wyników.");
             return;
         }
 
@@ -39,7 +39,7 @@ public class ResultSaver {
                 System.out.println(line);
             }
         } catch (IOException e) {
-            System.out.println("Could not read the results file: " + e.getMessage());
+            System.out.println("Nie udało się odczytać pliku wyników: " + e.getMessage());
         }
     }
 }

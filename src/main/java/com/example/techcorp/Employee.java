@@ -1,9 +1,9 @@
 package com.example.techcorp;
 
 /**
- * Common base class for every worker in the game.
- * Holds the data shared by all roles and defines the work() contract
- * that every subclass must implement in its own way.
+ * Wspólna klasa bazowa dla każdego pracownika w grze.
+ * Przechowuje dane wspólne dla wszystkich ról i definiuje metodę work(),
+ * którą każda podklasa musi zaimplementować na swój sposób.
  */
 public abstract class Employee {
 
@@ -13,20 +13,20 @@ public abstract class Employee {
 
     public Employee(String name, int skill, double salary) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Employee name cannot be null or blank.");
+            throw new IllegalArgumentException("Imię pracownika nie może być puste.");
         }
         if (skill <= 0) {
-            throw new IllegalArgumentException("Employee skill must be greater than 0.");
+            throw new IllegalArgumentException("Umiejętność pracownika musi być większa od 0.");
         }
         if (salary < 0) {
-            throw new IllegalArgumentException("Employee salary cannot be negative.");
+            throw new IllegalArgumentException("Wynagrodzenie nie może być ujemne.");
         }
         this.name = name;
         this.skill = skill;
         this.salary = salary;
     }
 
-    /** Amount of work points this employee produces in a single turn. */
+    /** Liczba punktów pracy, jaką pracownik wykonuje w jednej turze. */
     public abstract int work();
 
     public String getRoleName() {
