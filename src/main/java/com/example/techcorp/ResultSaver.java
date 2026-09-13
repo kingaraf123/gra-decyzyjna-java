@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/** Zapisuje i odczytuje wyniki gier z prostego pliku tekstowego, jedna linia na grę. */
+// zapisuje wyniki gier do pliku results.txt, jedna linia = jedna gra
 public class ResultSaver {
 
     private static final String FILE_NAME = "results.txt";
@@ -18,6 +18,7 @@ public class ResultSaver {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         String line = timestamp + " | gracz=" + playerName + " | tury=" + turns + " | zwyciezca=" + winner;
 
+        // true w FileWriter = dopisuję na koniec pliku, nie nadpisuję
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
             writer.write(line);
             writer.newLine();

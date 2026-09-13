@@ -1,6 +1,6 @@
 package com.example.techcorp;
 
-/** Zdarzenie pozytywne: projekt zyskuje dodatkowy postęp wprost (np. szczęśliwy przełom). */
+// dobry event, dodaje progres od razu bez zatrudniania nikogo
 public class ProductivityBoostEvent implements GameEvent {
 
     private final int amount;

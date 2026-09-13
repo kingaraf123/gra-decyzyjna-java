@@ -1,6 +1,6 @@
 package com.example.techcorp;
 
-/** Zdarzenie negatywne: firma traci gotówkę (np. spowolnienie rynku). */
+// zły event - zabiera gotówkę
 public class MarketSlowdownEvent implements GameEvent {
 
     private final double amount;

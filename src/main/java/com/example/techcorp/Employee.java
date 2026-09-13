@@ -1,10 +1,6 @@
 package com.example.techcorp;
 
-/**
- * Wspólna klasa bazowa dla każdego pracownika w grze.
- * Przechowuje dane wspólne dla wszystkich ról i definiuje metodę work(),
- * którą każda podklasa musi zaimplementować na swój sposób.
- */
+// Klasa bazowa dla pracownika - reszta klas po niej dziedziczy
 public abstract class Employee {
 
     private final String name;
@@ -26,7 +22,7 @@ public abstract class Employee {
         this.salary = salary;
     }
 
-    /** Liczba punktów pracy, jaką pracownik wykonuje w jednej turze. */
+    // każda podklasa sama mówi ile pracy robi w turze
     public abstract int work();
 
     public String getRoleName() {

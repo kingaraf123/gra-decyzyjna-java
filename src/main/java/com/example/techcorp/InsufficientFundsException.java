@@ -1,10 +1,6 @@
 package com.example.techcorp;
 
-/**
- * Wyjątek sprawdzany (checked), rzucany, gdy firma próbuje zatrudnić kogoś,
- * na kogo jej nie stać. Jest sprawdzany, ponieważ oczekujemy, że wołający
- * (pętla gry) obsłuży tę sytuację jawnie, zamiast pozwolić programowi się wywalić.
- */
+// rzucam ten wyjątek jak firmy nie stać na zatrudnienie kogoś
 public class InsufficientFundsException extends Exception {
 
     public InsufficientFundsException(String message) {

@@ -1,6 +1,6 @@
 package com.example.techcorp;
 
-/** Najmniejszy bezpośredni wkład pracy, ale najtańszy w zatrudnieniu. */
+// manager jest najsłabszy ale najtańszy do zatrudnienia
 public class Manager extends Employee {
 
     public Manager(String name, int skill, double salary) {

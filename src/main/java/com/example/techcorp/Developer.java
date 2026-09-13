@@ -1,6 +1,5 @@
 package com.example.techcorp;
 
-/** Pracownik o pełnej efektywności: w każdej turze wykonuje pracę równą pełnej wartości skill. */
 public class Developer extends Employee {
 
     public Developer(String name, int skill, double salary) {
@@ -9,6 +8,7 @@ public class Developer extends Employee {
 
     @Override
     public int work() {
+        // developer daje pełną wartość skill
         return getSkill();
     }
 }

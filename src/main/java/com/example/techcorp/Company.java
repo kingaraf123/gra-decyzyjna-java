@@ -3,7 +3,6 @@ package com.example.techcorp;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Jeden z dwóch graczy w grze: ma gotówkę, zespół i jeden projekt do ukończenia. */
 public class Company {
 
     private final String name;
@@ -23,12 +22,8 @@ public class Company {
         this.project = project;
     }
 
-    /**
-     * Zatrudnia pracownika, jeśli firmę na to stać.
-     * Warunek wstępny: cost <= cash. W przeciwnym razie rzucany jest
-     * InsufficientFundsException zamiast pozwolić, by gotówka spadła poniżej zera.
-     */
     public void hire(Employee employee, double cost) throws InsufficientFundsException {
+        // sprawdzam czy w ogóle stać firmę zanim cokolwiek się zmieni
         if (cost > cash) {
             throw new InsufficientFundsException(
                     name + " nie może pozwolić sobie na zatrudnienie " + employee.getName()
@@ -43,15 +38,14 @@ public class Company {
         project.workOneTurn();
     }
 
-    /** Używane przez negatywne zdarzenia losowe. Gotówka nigdy nie spada poniżej zera. */
     public void reduceCash(double amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("Kwota do odjęcia nie może być ujemna.");
         }
+        // Math.max(0, ...) żeby gotówka nie zeszła na minus
         cash = Math.max(0, cash - amount);
     }
 
-    /** Używane przez pozytywne zdarzenia losowe. */
     public void addCash(double amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("Kwota do dodania nie może być ujemna.");

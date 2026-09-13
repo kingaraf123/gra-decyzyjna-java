@@ -3,7 +3,6 @@ package com.example.techcorp;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Projekt, który firma stara się ukończyć jako pierwsza. */
 public class Project {
 
     private final String name;
@@ -30,20 +29,19 @@ public class Project {
         team.add(employee);
     }
 
-    /** Każdy pracownik z zespołu wykonuje pracę; postęp nie może przekroczyć requiredWork. */
     public void workOneTurn() {
+        // każdy z zespołu robi swoją część, sumujemy do progress
         for (Employee employee : team) {
             progress += employee.work();
         }
+
+        // pilnuję żeby nie przeskoczyć ponad wymaganą pracę
         if (progress > requiredWork) {
             progress = requiredWork;
         }
     }
 
-    /**
-     * Dodaje postęp bezpośrednio (np. w wyniku zdarzenia losowego).
-     * Warunek wstępny: amount >= 0. Warunek końcowy: 0 <= progress <= requiredWork.
-     */
+    // to jest do zdarzeń losowych - dodaje progres bez liczenia pracy zespołu
     public void addProgress(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("Wartość postępu nie może być ujemna.");

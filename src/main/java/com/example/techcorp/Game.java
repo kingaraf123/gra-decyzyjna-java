@@ -4,16 +4,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-/**
- * Wyścig turowy: Twoja firma kontra firma sterowana przez algorytm.
- * Obie zaczynają z tą samą gotówką i tym samym wymaganym nakładem pracy;
- * wygrywa ta, która pierwsza ukończy projekt.
- */
+// tutaj jest cała pętla gry - ja vs algorytm
 public class Game {
 
     private static final int REQUIRED_WORK = 60;
     private static final double STARTING_CASH = 10000;
-    private static final double EVENT_CHANCE = 0.35;
+    private static final double EVENT_CHANCE = 0.35; // 35% szans na event w turze
 
     private final Company player;
     private final Company algorithm;
@@ -86,12 +82,13 @@ public class Game {
         try {
             return Integer.parseInt(scanner.nextLine().trim());
         } catch (NumberFormatException e) {
+            // jak ktoś wpisze coś dziwnego, po prostu traktuję to jako pominięcie tury
             return -1;
         }
     }
 
-    /** Bardzo prosty algorytm przeciwnika: zatrudnia, dopóki go stać, w przeciwnym razie oszczędza. */
     private void algorithmTurn() {
+        // prosta reguła dla bota, nic wymyślnego
         int teamSize = algorithm.getEmployees().size() + 1;
         try {
             if (algorithm.getCash() >= 4000 && algorithm.getEmployees().size() < 3) {
@@ -108,7 +105,6 @@ public class Game {
         }
     }
 
-    /** Z prawdopodobieństwem EVENT_CHANCE stosuje losowe zdarzenie na losowo wybranej firmie. */
     private void triggerRandomEvent() {
         if (random.nextDouble() > EVENT_CHANCE) {
             return;

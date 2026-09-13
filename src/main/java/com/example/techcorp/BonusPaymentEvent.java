@@ -1,6 +1,5 @@
 package com.example.techcorp;
 
-/** Zdarzenie pozytywne: firma otrzymuje dodatkową gotówkę (np. premia od inwestora). */
 public class BonusPaymentEvent implements GameEvent {
 
     private final double amount;
